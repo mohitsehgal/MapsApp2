@@ -9,6 +9,7 @@ import android.os.Bundle;
 
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GooglePlayServicesUtil;
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.MapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -17,18 +18,23 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MainActivity extends Activity {
+	
+	
+	String location="53.558 9.927";
+	String status="I am here to get you!!!";
+	String message=location+"~#######~"+status;
 
-
+	
 	
 	 static final LatLng HAMBURG = new LatLng(53.558, 9.927);
 	  static final LatLng KIEL = new LatLng(53.551, 9.993);
-	  private GoogleMap map;
+	  private GoogleMap map2;
 
 	  @Override
 	  protected void onCreate(Bundle savedInstanceState) {
 	    super.onCreate(savedInstanceState);
 	    setContentView(R.layout.activity_main);
-	    map = ((MapFragment) getFragmentManager().findFragmentById(R.id.map))
+	    map2 = ((MapFragment) getFragmentManager().findFragmentById(R.id.map2))
 	        .getMap();
 	    LocationManager lManager=(LocationManager)this.getSystemService(LOCATION_SERVICE);
 	    
@@ -48,11 +54,11 @@ public class MainActivity extends Activity {
 	        dialog.show();
 
 	    }else { // Google Play Services are available
+	    	 map2.setMyLocationEnabled(true);
 
-	        
+	        /*
 	        // Enabling MyLocation Layer of Google Map
-	     map.setMyLocationEnabled(true);
-
+	    
 	        // Getting LocationManager object from System Service LOCATION_SERVICE
 	        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -65,22 +71,26 @@ public class MainActivity extends Activity {
 	        // Getting Current Location
 	        Location location = locationManager.getLastKnownLocation(provider);
 	         double latitude=location.getLatitude();
-	         double longitude=location.getLongitude();
-	         LatLng curLatLng=new LatLng(latitude, longitude);
+	         double longitude=location.getLongitude(); */
+//	         LatLng curLatLng=new LatLng(latitude, longitude);
 	         
 	         
-	         if (map!=null){
-	   	      Marker hamburg = map.addMarker(new MarkerOptions().position(HAMBURG)
+	         if (map2!=null){
+	   	      Marker hamburg = map2.addMarker(new MarkerOptions().position(HAMBURG)
 	   	          .title("Hamburg"));
-	   	      Marker kiel = map.addMarker(new MarkerOptions()
+	   	      Marker kiel = map2.addMarker(new MarkerOptions()
 	   	          .position(KIEL)
 	   	          .title("Kiel")
 	   	          .snippet("Kiel is cool")
 	   	          .icon(BitmapDescriptorFactory
 	   	              .fromResource(R.drawable.ic_launcher)));
-	   	      Marker mohit=map.addMarker(new MarkerOptions().position(curLatLng).title("My Current Location").snippet("I am here. Do you know that? "));
+	//   	      Marker curLoc=map.addMarker(new MarkerOptions().position(curLatLng).title("My Current Location").snippet("I am here. Do you know that? "));
 	   	      
-	   	      
+	   	 //Move the camera instantly to hamburg with a zoom of 15.
+	   	   map2.moveCamera(CameraUpdateFactory.newLatLngZoom(HAMBURG, 15));
+
+	   	   // Zoom in, animating the camera.
+	   	   map2.animateCamera(CameraUpdateFactory.zoomTo(10), 2000, null); 
 	   	    }
 	         
 	    }

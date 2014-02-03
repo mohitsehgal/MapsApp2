@@ -3,12 +3,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MainActivity" >
+    tools:context=".SmsDisplayActivity" >
 	<TextView 
     	android:layout_height="wrap_content"
     	android:layout_width="match_parent"
     	android:text=""
-    	android:id="@+id/senderName1"
+    	android:id="@+id/senderName"
     	
     />
 	
@@ -16,12 +16,19 @@
 	    android:layout_height="wrap_content"
    	    android:layout_width="match_parent"
    	    android:text=""
-   	    android:id="@+id/statusMessageReceived1"
+   	    android:id="@+id/statusMessageReceived"
     />
-    <fragment
-        android:id="@+id/map2"
+    
+	<TextView 
+	    android:layout_height="wrap_content"
+   	    android:layout_width="match_parent"
+   	    android:text=""
+   	    android:id="@+id/location"
+    />
+    
+	 <fragment
+        android:id="@+id/map"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         class="com.google.android.gms.maps.MapFragment" />
-
 </LinearLayout> 
