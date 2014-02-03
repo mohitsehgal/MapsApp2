@@ -22,7 +22,9 @@ public class SmsDisplayActivity extends Activity {
 	 static final LatLng HAMBURG = new LatLng(53.558, 9.927);
 	  static final LatLng KIEL = new LatLng(53.551, 9.993);
 	
-	
+	boolean debug=true;
+	  
+	  
 	String sender;
 	String body;
 	String locationString;
@@ -49,7 +51,8 @@ public class SmsDisplayActivity extends Activity {
 		this.sender=receivedIntent.getStringExtra(SMSBroadcastReceiver.SENDER_STRING);
 		this.body=receivedIntent.getStringExtra(SMSBroadcastReceiver.STATUS_STRING);
 		this.locationString=receivedIntent.getStringExtra(SMSBroadcastReceiver.LOCATION_STRING);
-	//	initializeReceivedLoc();
+		if(!debug)
+		initializeReceivedLoc();
 		this.isErrorParsingMessage=receivedIntent.getBooleanExtra(SMSBroadcastReceiver.IS_ERROR_PARSING_MESSAGE,false);
 		if(isErrorParsingMessage)
 		{
@@ -57,11 +60,13 @@ public class SmsDisplayActivity extends Activity {
 		}
 		else
 		{
-			this.sender="9646084419";
-			this.body="Hey I am here!!";
-			this.locationString="53.558 9.927";
-			initializeReceivedLoc();
-			
+			if(debug)
+			{
+				this.sender="9646084419";
+				this.body="Hey I am here!!";
+				this.locationString="53.558 9.927";
+				initializeReceivedLoc();
+			}
 			sender.setText(this.sender);
 			bodyTextView.setText(this.body);
 			locationTextView.setText(this.locationString);
